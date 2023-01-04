@@ -48,22 +48,22 @@ def home(request):
     artistAliasDictionary[x[1]] if x[1] in artistAliasDictionary else x[1], x[2]))
 
     #Créer un RDD composé d'objets 'userid' et 'playcount' du tuple d'origine   
-    userSum = userArtistData.map(lambda x:(x[0],x[2]))
-    playCount1 = userSum.map(lambda x: (x[0],x[1])).reduceByKey(lambda a,b : a+b)
-    playCount2 = userSum.map(lambda x: (x[0],1)).reduceByKey(lambda a,b:a+b)
-    playSumAndCount = playCount1.leftOuterJoin(playCount2)
+    # userSum = userArtistData.map(lambda x:(x[0],x[2]))
+    # playCount1 = userSum.map(lambda x: (x[0],x[1])).reduceByKey(lambda a,b : a+b)
+    # playCount2 = userSum.map(lambda x: (x[0],1)).reduceByKey(lambda a,b:a+b)
+    # playSumAndCount = playCount1.leftOuterJoin(playCount2)
 
 
-    # Compter les instances par clé et stocker dans la variable de diffusion
+    # # Compter les instances par clé et stocker dans la variable de diffusion
 
-    playSumAndCount = playSumAndCount.map(lambda x: (x[0],x[1][0],int(x[1][0]/x[1][1])))
+    # playSumAndCount = playSumAndCount.map(lambda x: (x[0],x[1][0],int(x[1][0]/x[1][1])))
 
-    # Compute and display users with the highest playcount along with their mean playcount across artists
-    # YOUR CODE GOES HERE
+    # # Compute and display users with the highest playcount along with their mean playcount across artists
+    # # YOUR CODE GOES HERE
 
-    TopThree = playSumAndCount.top(3,key=lambda x: x[1])
-    for i in TopThree:
-        print('User '+str(i[0])+' has a total play count of '+str(i[1])+' and a mean play count of '+str(i[2])+'.')
+    # TopThree = playSumAndCount.top(3,key=lambda x: x[1])
+    # for i in TopThree:
+    #     print('User '+str(i[0])+' has a total play count of '+str(i[1])+' and a mean play count of '+str(i[2])+'.')
 
 
     # Split the 'userArtistData' dataset into training, validation and test datasets. Store in cache for frequent access
